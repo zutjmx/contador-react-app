@@ -1,13 +1,14 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
+import { faker } from '@faker-js/faker';
 
-export const ContadorApp = () => {
+export const ContadorApp = ({valorInicial}) => {
 
-    const [contador, setContador] = useState(0);
+    const [contador, setContador] = useState(valorInicial);
 
     const incrementar = () => {
-        console.log('Se dio clic en el botón:');
-        setContador(contador + 1);
-        console.log('valor contador: ', contador);
+        //setContador(contador + 1);
+        setContador(c => c + 1); //Mediante callback
     }
 
     return <>
@@ -17,4 +18,12 @@ export const ContadorApp = () => {
             incrementar()
         }}>Incrementar Contador +1</button>
     </>
+}
+
+ContadorApp.propTypes = {
+    valorInicial: PropTypes.number.isRequired,
+}
+
+ContadorApp.defaultProps = {
+    valorInicial: faker.number.int({min:1, max:10}),
 }
